@@ -1,5 +1,5 @@
 import React from "react";
-import { renderToString } from "react-dom/server";
+import { renderToNodeStream } from "react-dom/server";
 import App from "./App";
 import express from "express";
 import fs from "fs";
@@ -24,15 +24,20 @@ app.use((req, res) => {
   <body>
     <div id="application">`);
 
-  res.write(renderToString(<App />));
-  res.write(`
+  const stream = renderToNodeStream(<App />);
+
+  stream.pipe(res, { end: false });
+
+  stream.on("end", () => {
+    res.write(`
     </div>
     <script src="client.js"></script>
   </body>
   
   </html>
     `);
-  res.end();
+    res.end();
+  });
 });
 
 app.listen(3003);

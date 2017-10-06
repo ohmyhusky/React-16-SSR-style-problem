@@ -9,13 +9,12 @@
     "babel-preset-react": "^6.24.1",
     "express": "^4.16.1",
     "nodemon": "^1.12.1",
-    "react": "^15.6.2",
-    "react-dom": "^15.6.2",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "webpack": "^3.6.0"
   },
   "scripts": {
-    "build-server":
-      "./node_modules/.bin/webpack --config ./webpack.config.server.js",
+    "build-server": "./node_modules/.bin/webpack --config ./webpack.config.server.js",
     "build-client": "./node_modules/.bin/webpack",
     "build": "yarn run build-client && yarn run build-server"
   }
